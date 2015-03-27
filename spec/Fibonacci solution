@@ -1,0 +1,36 @@
+var fibonacci = function(n) {
+  var cache = {};
+  var x = n;
+  var fib = function(n,x){
+    if (typeof cache[x] !== 'undefined' ) {
+      return cache[x];
+    } else{
+      if(n===1){
+        cache[0] = 0;
+        cache[n] = n;
+        fib(n+1,x);
+      } else{
+          if (typeof cache[0] === 'undefined'){
+            fib(n-1,x);  
+          } else{
+            cache[n] = cache[n-1] + cache[n-2];
+            fib(n+1,x);
+            } 
+        }
+      } 
+  };
+  fib(n,x);
+  return cache[x];
+};
+
+
+
+// var fibonacci = function (n){
+//   var arr = [1,1] || arr;
+//   if (arr.length === n){
+//   }else{
+//     arr.push(arr[(arr.length-1)] + arr[(arr.length-2)]);
+//     fibonacci(n+1);
+//   }
+// return arr[n-1];
+// };  
