@@ -84,8 +84,5 @@
     return newArr;
 }
 
-
-
-
 };
 module.exports = myFunctions;

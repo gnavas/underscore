@@ -1,7 +1,7 @@
 function PrimeFactorizer(n){
   var originalNum = n;
   var arr = [];
-  var answer = {};
+  this.answer = {};
   var isPrime = function(n){
     var arrPrime = [];
     if (n<2){
@@ -23,11 +23,9 @@ function PrimeFactorizer(n){
   };
 
   var prime = function(num){
-    console.log("Made it to function prime");
     while(isPrime(num) === false){
       var i = 2;
       while ( i <= Math.sqrt(originalNum)){
-        console.log(i);
         if(num%i === 0){
           arr.push(i);
           newNum = num/i;
@@ -40,21 +38,19 @@ function PrimeFactorizer(n){
   };
   prime(n);
   arr.forEach(function(x){
-    console.log("arr",arr,"x",x,"answer[x]",answer[x]);
-    if (typeof(answer[x.toString()]) === 'undefined'){
-      answer[x.toString()] = 1;
-      console.log("if",answer[x]);
+    if (typeof(this.answer[x.toString()]) === 'undefined'){
+      this.answer[x.toString()] = 1;
     } else {
-      answer[x.toString()]= answer[x.toString()] + 1;
-      console.log("else",answer[x]);
+      this.answer[x.toString()]= this.answer[x.toString()] + 1;
     }
 
-  });
- Object.defineProperty(PrimeFactorizer, "factor",{
-  value:answer
- }); 
-return answer;
+  }.bind(this));
 }
 
+PrimeFactorizer.prototype = {
+    get factor () {
+      return this.answer;
+    }
+};
 
-
+new PrimeFactorizer(13).factor
